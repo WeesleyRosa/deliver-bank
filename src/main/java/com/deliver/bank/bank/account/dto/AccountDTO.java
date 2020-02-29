@@ -1,5 +1,6 @@
 package com.deliver.bank.bank.account.dto;
 
+import com.deliver.bank.bank.account.entities.Account;
 import com.deliver.bank.bank.account.entities.AccountType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,15 @@ public class AccountDTO {
     private String agency;
     private String password;
     private AccountType accountType;
+
+    public AccountDTO(Account account) {
+        this.id = account.getId();
+        this.accountNumber = account.getAccountNumber();
+        this.balance = account.getBalance();
+        this.agency = account.getAgency();
+        this.password = account.getPassword();
+        this.accountType = account.getAccountType();
+    }
 
     public Long getId() {
         return id;

@@ -6,6 +6,8 @@ import com.deliver.bank.bank.account.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountService {
 
@@ -19,7 +21,17 @@ public class AccountService {
     public void save(AccountDTO accountDTO){
         accountRepository.save(fromDTO(accountDTO));
     }
+
+    public List<Account> getAll() {
+        return accountRepository.findAll();
+    }
+
     public Account fromDTO(AccountDTO accountDTO){
-        return new Account(accountDTO.getId(), accountDTO.getAccountNumber(), accountDTO.getBalance(), accountDTO.getAgency(), accountDTO.getPassword(), accountDTO.getAccountType());
+        return new Account(accountDTO.getId(), accountDTO.getAccountNumber(), accountDTO.getBalance(),
+                accountDTO.getAgency(), accountDTO.getPassword(), accountDTO.getAccountType());
+    }
+
+    public Account findByAccountNumber(String accountNumber) {
+        return accountRepository.findByAccountNumber(accountNumber);
     }
 }
