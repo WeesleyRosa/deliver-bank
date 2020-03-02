@@ -1,7 +1,5 @@
 package com.deliver.bank.bank.person.service;
 
-import com.deliver.bank.bank.account.dto.AccountDTO;
-import com.deliver.bank.bank.account.entities.Account;
 import com.deliver.bank.bank.person.dto.PersonDTO;
 import com.deliver.bank.bank.person.entities.Person;
 import com.deliver.bank.bank.person.repository.PersonRepository;
@@ -28,8 +26,9 @@ public class PersonService {
         return personRepository.findAll();
     }
 
-    public Account fromDTO(PersonDTO personDTO) {
-        return new Person(personDTO.getPersonId(), personDTO.getIdentifier(), personDTO.getFullName(), personDTO.getAddress(), personDTO.getEmail(), personDTO.getTelephoneNumber());
+    public Person fromDTO(PersonDTO personDTO) {
+        return new Person(personDTO.getPersonId(), personDTO.getIdentifier(), personDTO.getFullName(),
+                            personDTO.getAddress(), personDTO.getEmail(), personDTO.getTelephoneNumber());
     }
     public Person findByIdentifier (String identifier) {
         return personRepository.findByIdentifier(identifier);
