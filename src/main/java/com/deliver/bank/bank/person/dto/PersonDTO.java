@@ -1,6 +1,5 @@
 package com.deliver.bank.bank.person.dto;
 
-import com.deliver.bank.bank.account.entities.Account;
 import com.deliver.bank.bank.person.entities.Person;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PersonDTO {
 
-    public String getId;
     private Long personId;
     private String identifier; //CNPJ or CPF
     private String fullName;
