@@ -31,4 +31,10 @@ public class PersonController {
         List<PersonDTO> listDto = list.stream().map(obj -> new PersonDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
+
+    @GetMapping(value = "/{identifier}")
+    public ResponseEntity<PersonDTO> findById(@PathVariable String identifier) {
+        PersonDTO personDTO = new PersonDTO(personService.findByIdentifier(identifier));
+        return ResponseEntity.ok().body(personDTO);
+    }
 }
