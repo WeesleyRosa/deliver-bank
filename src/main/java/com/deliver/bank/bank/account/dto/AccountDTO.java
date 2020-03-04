@@ -2,6 +2,7 @@ package com.deliver.bank.bank.account.dto;
 
 import com.deliver.bank.bank.account.entities.Account;
 import com.deliver.bank.bank.account.entities.AccountType;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

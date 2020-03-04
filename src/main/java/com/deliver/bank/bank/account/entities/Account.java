@@ -1,5 +1,6 @@
 package com.deliver.bank.bank.account.entities;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 @Table(name = "account")
 @Data
 @NoArgsConstructor
+@Builder
 public class Account {
 
     @Id
