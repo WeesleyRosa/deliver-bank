@@ -21,7 +21,7 @@ public class PersonController {
     PersonService personService;
 
     @PostMapping
-    public ResponseEntity<PersonDTO> createNewPerson(@RequestBody PersonDTO personDTO){
+    public ResponseEntity<PersonDTO> createNewPerson(@RequestBody PersonDTO personDTO) {
     personService.save(personDTO);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 }
@@ -36,5 +36,17 @@ public class PersonController {
     public ResponseEntity<PersonDTO> findById(@PathVariable String identifier) {
         PersonDTO personDTO = new PersonDTO(personService.findByIdentifier(identifier));
         return ResponseEntity.ok().body(personDTO);
+    }
+
+    @PutMapping(value = "/{identifier}")
+    public ResponseEntity<Void> update(@PathVariable String identifier, @RequestBody PersonDTO personDTO) {
+        personService.update(identifier, personDTO);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @DeleteMapping(value = "/{identifier}")
+    public ResponseEntity<Void> remove(@PathVariable String identifier) {
+        personService.remove(identifier);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

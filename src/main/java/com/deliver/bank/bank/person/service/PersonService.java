@@ -26,11 +26,26 @@ public class PersonService {
         return personRepository.findAll();
     }
 
-    public Person fromDTO(PersonDTO personDTO) {
-        return new Person(personDTO.getPersonId(), personDTO.getIdentifier(), personDTO.getFullName(),
-                            personDTO.getAddress(), personDTO.getEmail(), personDTO.getTelephoneNumber());
-    }
     public Person findByIdentifier (String identifier) {
         return personRepository.findByIdentifier(identifier);
+    }
+
+    public void update(String identifier, PersonDTO personDTO) {
+        Person person = this.findByIdentifier(identifier);
+        person.setFullName(personDTO.getFullName());
+        person.setAddress(personDTO.getAddress());
+        person.setEmail(personDTO.getEmail());
+        person.setTelephoneNumber(personDTO.getTelephoneNumber());
+        personRepository.save(person);
+    }
+
+    public void remove(String identifier) {
+        Person person = personRepository.findByIdentifier(identifier);
+        personRepository.delete(person);
+    }
+
+    public Person fromDTO(PersonDTO personDTO) {
+        return new Person(personDTO.getPersonId(), personDTO.getIdentifier(), personDTO.getFullName(),
+                personDTO.getAddress(), personDTO.getEmail(), personDTO.getTelephoneNumber());
     }
 }
