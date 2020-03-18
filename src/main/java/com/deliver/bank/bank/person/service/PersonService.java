@@ -1,6 +1,6 @@
 package com.deliver.bank.bank.person.service;
 
-import com.deliver.bank.bank.person.dto.PersonDTO;
+import com.deliver.bank.bank.person.dto.PersonRequestDTO;
 import com.deliver.bank.bank.person.entities.Person;
 import com.deliver.bank.bank.person.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,8 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public void save(PersonDTO personDTO) {
-        personRepository.save(fromDTO(personDTO));
+    public Person save(PersonRequestDTO personDTO) {
+        return personRepository.save(fromDTO(personDTO));
     }
 
     public List<Person> getAll() {
@@ -30,7 +30,7 @@ public class PersonService {
         return personRepository.findByIdentifier(identifier);
     }
 
-    public void update(String identifier, PersonDTO personDTO) {
+    public void update(String identifier, PersonRequestDTO personDTO) {
         Person person = this.findByIdentifier(identifier);
         person.setFullName(personDTO.getFullName());
         person.setAddress(personDTO.getAddress());
@@ -44,8 +44,13 @@ public class PersonService {
         personRepository.delete(person);
     }
 
-    public Person fromDTO(PersonDTO personDTO) {
-        return new Person(personDTO.getPersonId(), personDTO.getIdentifier(), personDTO.getFullName(),
-                personDTO.getAddress(), personDTO.getEmail(), personDTO.getTelephoneNumber());
+    public Person fromDTO(PersonRequestDTO personDTO) {
+        return new Person(null,
+                personDTO.getIdentifier(),
+                personDTO.getFullName(),
+                personDTO.getAddress(),
+                personDTO.getEmail(),
+                personDTO.getTelephoneNumber(),
+                personDTO.getPassword());
     }
 }
