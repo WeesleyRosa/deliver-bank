@@ -28,7 +28,7 @@ public class AccountService {
 
     public Account fromDTO(AccountDTO accountDTO){
         return new Account(accountDTO.getId(), accountDTO.getAccountNumber(), accountDTO.getBalance(),
-                accountDTO.getAgency(), accountDTO.getPassword(), accountDTO.getAccountType());
+                accountDTO.getAgency(), accountDTO.getPassword(),accountDTO.getAccountType() );
     }
 
     public Account findByAccountNumber(String accountNumber) {
