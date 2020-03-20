@@ -1,6 +1,8 @@
-package com.deliver.bank.bank.auth.security;
+package com.deliver.bank.bank.auth.security.filters;
 
 import com.deliver.bank.bank.auth.dto.CredentialsDTO;
+import com.deliver.bank.bank.auth.security.JWTUtil;
+import com.deliver.bank.bank.auth.security.UserSecurity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

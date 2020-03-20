@@ -1,7 +1,8 @@
 package com.deliver.bank.bank.auth.config;
 
-import com.deliver.bank.bank.auth.security.JWTAuthenticationFilter;
+import com.deliver.bank.bank.auth.security.filters.JWTAuthenticationFilter;
 import com.deliver.bank.bank.auth.security.JWTUtil;
+import com.deliver.bank.bank.auth.security.filters.JWTAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
                 .anyRequest().authenticated();
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
