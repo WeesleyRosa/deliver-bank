@@ -1,7 +1,6 @@
 package com.deliver.bank.bank.auth.security;
 
 import com.deliver.bank.bank.person.entities.enums.PersonProfile;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -66,5 +65,9 @@ public class UserSecurity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public boolean hasRole(PersonProfile profile) {
+        return this.getAuthorities().contains(new SimpleGrantedAuthority(profile.getProfileDescription()));
     }
 }
