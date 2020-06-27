@@ -2,6 +2,7 @@ package com.deliver.bank.bank.auth.security;
 
 import com.deliver.bank.bank.person.entities.enums.PersonProfile;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,12 +12,12 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Data
 @NoArgsConstructor
 public class UserSecurity implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
+    @Getter
     private Long id;
     private String email;
     private String password;
@@ -26,13 +27,10 @@ public class UserSecurity implements UserDetails {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.authorities = profiles.stream()
+        this.authorities = profiles
+                .stream()
                 .map(profile -> new SimpleGrantedAuthority(profile.getProfileDescription()))
                 .collect(Collectors.toSet());
-    }
-
-    public Long getId() {
-        return this.id;
     }
 
     @Override
