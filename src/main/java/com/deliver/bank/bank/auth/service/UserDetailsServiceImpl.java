@@ -1,9 +1,9 @@
 package com.deliver.bank.bank.auth.service;
 
 import com.deliver.bank.bank.auth.security.UserSecurity;
-import com.deliver.bank.bank.user.entities.User;
-import com.deliver.bank.bank.user.entities.enums.UserProfile;
-import com.deliver.bank.bank.user.repository.UserRepository;
+import com.deliver.bank.bank.domain.user.entities.User;
+import com.deliver.bank.bank.domain.user.entities.enumerator.UserProfile;
+import com.deliver.bank.bank.domain.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

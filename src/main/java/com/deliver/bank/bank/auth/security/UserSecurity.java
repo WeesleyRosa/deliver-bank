@@ -1,6 +1,6 @@
 package com.deliver.bank.bank.auth.security;
 
-import com.deliver.bank.bank.user.entities.enums.UserProfile;
+import com.deliver.bank.bank.domain.user.entities.enumerator.UserProfile;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
