@@ -35,11 +35,19 @@ public class User implements Serializable {
     private Address address;
 
     private LocalDate birthday;
+
+    @Enumerated(EnumType.STRING)
     private UserType userType;
+
     private String email;
     private String telephone;
     private String password;
+
+    @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
+
+    @Enumerated(EnumType.STRING)
     private UserProfile userProfile;
+
     private LocalDateTime createdAt;
 }

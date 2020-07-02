@@ -1,4 +1,4 @@
-package com.deliver.bank.bank.user.controller;
+package com.deliver.bank.bank.user.controllers;
 
 import com.deliver.bank.bank.user.dto.UserSaveDTO;
 import com.deliver.bank.bank.user.dto.UserGetDTO;

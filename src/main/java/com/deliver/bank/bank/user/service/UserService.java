@@ -1,6 +1,8 @@
 package com.deliver.bank.bank.user.service;
 
+import com.deliver.bank.bank.user.controllers.client.CpfValidationClient;
 import com.deliver.bank.bank.user.dto.AddressDTO;
+import com.deliver.bank.bank.user.dto.CpfValidationResponseDTO;
 import com.deliver.bank.bank.user.dto.UserSaveDTO;
 import com.deliver.bank.bank.user.dto.UserUpdateDTO;
 import com.deliver.bank.bank.user.entities.Address;
@@ -9,7 +11,8 @@ import com.deliver.bank.bank.user.entities.enums.UserProfile;
 import com.deliver.bank.bank.user.entities.enums.UserStatus;
 import com.deliver.bank.bank.user.repository.AddressRepository;
 import com.deliver.bank.bank.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.deliver.bank.bank.user.service.exceptions.CpfValidationException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,24 +20,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
+    private final CpfValidationClient cpfValidationClient;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
-    public UserService(
-            UserRepository userRepository,
-            AddressRepository addressRepository,
-            BCryptPasswordEncoder passwordEncoder
-    ) {
-        this.userRepository = userRepository;
-        this.addressRepository = addressRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
-
     public User save(UserSaveDTO userDTO) {
+        if (validateCpf(userDTO).getStatus().equalsIgnoreCase("UNABLE_TO_VOTE")) {
+            throw new CpfValidationException("Falha na validação do CPF");
+        }
         return userRepository.save(fromDTO(userDTO));
     }
 
@@ -63,6 +60,10 @@ public class UserService {
     public void remove(String identifier) {
         User user = userRepository.findByIdentifier(identifier);
         userRepository.delete(user);
+    }
+
+    public CpfValidationResponseDTO validateCpf(UserSaveDTO userDTO) {
+        return cpfValidationClient.validateCpf(userDTO.getIdentifier());
     }
 
     public User fromDTO(UserSaveDTO userDTO) {
