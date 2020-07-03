@@ -31,9 +31,9 @@ public class UserService {
 
     public User save(UserSaveDTO userDTO) {
         if (validateCpf(userDTO).getStatus().equalsIgnoreCase("UNABLE_TO_VOTE")) {
-            throw new CpfValidationException("Falha na validação do CPF");
+          return userRepository.save(fromDTO(userDTO, UserStatus.IN_ANALYSIS));
         }
-        return userRepository.save(fromDTO(userDTO));
+        else return userRepository.save(fromDTO(userDTO, UserStatus.APPROVED));
     }
 
     public List<User> getAll() {
@@ -67,7 +67,7 @@ public class UserService {
         return cpfValidationClient.validateCpf(userDTO.getIdentifier());
     }
 
-    public User fromDTO(UserSaveDTO userDTO) {
+    public User fromDTO(UserSaveDTO userDTO, UserStatus userStatus) {
         return new User(
                 null,
                 userDTO.getIdentifier(),
@@ -78,7 +78,7 @@ public class UserService {
                 userDTO.getEmail(),
                 userDTO.getTelephone(),
                 passwordEncoder.encode(userDTO.getPassword()),
-                UserStatus.CREATED,
+                userStatus,
                 UserProfile.USER,
                 LocalDateTime.now(),
                 BigDecimal.ZERO
