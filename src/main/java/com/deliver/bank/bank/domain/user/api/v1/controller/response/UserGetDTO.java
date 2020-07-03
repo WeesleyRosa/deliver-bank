@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -27,6 +28,7 @@ public class UserGetDTO implements Serializable {
     private String telephone;
     private UserStatus userStatus;
     private UserProfile userProfile;
+    private BigDecimal balance;
 
     public UserGetDTO(User user) {
         this.id = user.getId();
@@ -39,5 +41,6 @@ public class UserGetDTO implements Serializable {
         this.telephone = user.getTelephone();
         this.userStatus = user.getUserStatus();
         this.userProfile = user.getUserProfile();
+        this.balance = user.getBalance();
     }
 }

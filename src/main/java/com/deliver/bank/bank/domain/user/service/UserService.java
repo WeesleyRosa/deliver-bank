@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -79,7 +80,8 @@ public class UserService {
                 passwordEncoder.encode(userDTO.getPassword()),
                 UserStatus.CREATED,
                 UserProfile.USER,
-                LocalDateTime.now()
+                LocalDateTime.now(),
+                BigDecimal.ZERO
         );
     }
 

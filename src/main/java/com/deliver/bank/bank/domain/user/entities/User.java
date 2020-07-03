@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -50,4 +51,6 @@ public class User implements Serializable {
     private UserProfile userProfile;
 
     private LocalDateTime createdAt;
+
+    private BigDecimal balance;
 }
