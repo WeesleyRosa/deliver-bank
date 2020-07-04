@@ -1,4 +1,4 @@
-package com.deliver.bank.bank.transaction.entities;
+package com.deliver.bank.bank.domain.transaction.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

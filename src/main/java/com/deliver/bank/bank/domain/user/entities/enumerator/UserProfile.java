@@ -1,6 +1,6 @@
-package com.deliver.bank.bank.person.entities.enums;
+package com.deliver.bank.bank.domain.user.entities.enumerator;
 
-public enum PersonProfile {
+public enum UserProfile {
     ADMIN(1, "ROLE_ADMIN"),
     USER(2, "ROLE_USER");
 
@@ -9,7 +9,7 @@ public enum PersonProfile {
     private Integer profileCode;
     private String profileDescription;
 
-    PersonProfile(Integer profileCode, String profileDescription) {
+    UserProfile(Integer profileCode, String profileDescription) {
         this.profileCode = profileCode;
         this.profileDescription = profileDescription;
     }
@@ -22,12 +22,12 @@ public enum PersonProfile {
         return this.profileDescription;
     }
 
-    public static PersonProfile toEnum(Integer profileCode) {
+    public static UserProfile toEnum(Integer profileCode) {
         if (profileCode == null) return null;
 
-        for (PersonProfile profile : PersonProfile.values())
+        for (UserProfile profile : UserProfile.values())
             if (profileCode.equals(profile.getProfileCode())) return profile;
 
-        throw new IllegalArgumentException(PersonProfile.INVALID_PROFILE_CODE + profileCode);
+        throw new IllegalArgumentException(UserProfile.INVALID_PROFILE_CODE + profileCode);
     }
 }

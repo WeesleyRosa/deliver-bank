@@ -1,6 +1,6 @@
 package com.deliver.bank.bank.auth.security;
 
-import com.deliver.bank.bank.person.entities.enums.PersonProfile;
+import com.deliver.bank.bank.domain.user.entities.enumerator.UserProfile;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,7 +22,7 @@ public class UserSecurity implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserSecurity(Long id, String email, String password, Set<PersonProfile> profiles) {
+    public UserSecurity(Long id, String email, String password, Set<UserProfile> profiles) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -67,7 +67,7 @@ public class UserSecurity implements UserDetails {
         return true;
     }
 
-    public boolean hasRole(PersonProfile profile) {
+    public boolean hasRole(UserProfile profile) {
         return this.getAuthorities().contains(new SimpleGrantedAuthority(profile.getProfileDescription()));
     }
 }
