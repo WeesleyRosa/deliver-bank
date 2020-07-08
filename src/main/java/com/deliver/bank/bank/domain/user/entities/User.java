@@ -4,6 +4,7 @@ import com.deliver.bank.bank.domain.user.entities.enumerator.UserProfile;
 import com.deliver.bank.bank.domain.user.entities.enumerator.UserStatus;
 import com.deliver.bank.bank.domain.user.entities.enumerator.UserType;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;

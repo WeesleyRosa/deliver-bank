@@ -1,5 +1,7 @@
 package com.deliver.bank.bank.domain.user.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +10,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "addresses")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
+@Builder
 public class Address {
 
     @Id
@@ -23,12 +27,4 @@ public class Address {
     private String country;
     private String houseNumber;
     private String streetName;
-
-    public Address(String cep, String city, String country, String houseNumber, String streetName) {
-        this.cep = cep;
-        this.city = city;
-        this.country = country;
-        this.houseNumber = houseNumber;
-        this.streetName = streetName;
-    }
 }

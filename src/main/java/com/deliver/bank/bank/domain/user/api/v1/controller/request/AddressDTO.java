@@ -1,6 +1,8 @@
 package com.deliver.bank.bank.domain.user.api.v1.controller.request;
 
 import com.deliver.bank.bank.domain.user.entities.Address;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +10,8 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class AddressDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;

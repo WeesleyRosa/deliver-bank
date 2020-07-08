@@ -11,13 +11,11 @@ import com.deliver.bank.bank.domain.user.entities.enumerator.UserProfile;
 import com.deliver.bank.bank.domain.user.entities.enumerator.UserStatus;
 import com.deliver.bank.bank.domain.user.repository.AddressRepository;
 import com.deliver.bank.bank.domain.user.repository.UserRepository;
-import com.deliver.bank.bank.domain.user.service.exceptions.CpfValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,16 +29,18 @@ public class UserService {
 
     public User save(UserSaveDTO userDTO) {
         if (validateCpf(userDTO).getStatus().equalsIgnoreCase("UNABLE_TO_VOTE")) {
-          return userRepository.save(fromDTO(userDTO, UserStatus.IN_ANALYSIS));
+            return userRepository.save(fromDTO(userDTO, UserStatus.IN_ANALYSIS));
         }
-        else return userRepository.save(fromDTO(userDTO, UserStatus.APPROVED));
+        else {
+            return userRepository.save(fromDTO(userDTO, UserStatus.APPROVED));
+        }
     }
 
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
-    public User findByIdentifier (String identifier) {
+    public User findByIdentifier(String identifier) {
         return userRepository.findByIdentifier(identifier);
     }
 
@@ -80,7 +80,7 @@ public class UserService {
                 passwordEncoder.encode(userDTO.getPassword()),
                 userStatus,
                 UserProfile.USER,
-                LocalDateTime.now(),
+                userDTO.getCreatedAt(),
                 BigDecimal.ZERO
         );
     }
